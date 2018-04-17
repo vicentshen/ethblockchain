@@ -1,20 +1,20 @@
-#必备工具和基本概念
+# 必备工具和基本概念
 
-目前基于Eth1.8.2版本
-搭建私链环境
+目前基于Eth1.8.2版本 搭建私链环境
 
-###环境说明
+### 环境说明
 
 Cenos7
 
-##前置条件
+## 前置条件
 
-###安装GO
+### 安装GO
 
 [安装链接](https://golang.org/dl/)
 
-###设置环境GO环境变量
-```js
+### 设置环境GO环境变量
+
+```javascript
 cd /root
 vi .bashrc
 ##在文件最后配置GOROOT和GOPATH，根据自己实际位置配置
@@ -23,11 +23,11 @@ export GOPATH=/root/go/go
 export PATH=$PATH:$GOROOT/bin
 ```
 
-###编译Go-EtherNet
+### 编译Go-EtherNet
 
-####下载源码并安装编译
+#### 下载源码并安装编译
 
-```shell
+```text
 wget https://github.com/ethereum/go-ethereum/archive/v1.8.2.tar.gz
 tar -xvf v1.8.2.tar.gz
 cd go-ethereum-1.8.2
@@ -35,20 +35,20 @@ make geth
 mak all
 ```
 
-##启动私链
+## 启动私链
 
-###初始化
+### 初始化
 
-```js
+```javascript
 //cd到数据目录下
 cd /root/ethereum/data
 mkdir conf
 cd conf
 ```
 
-###新建私链配置文件
+### 新建私链配置文件
 
-```js
+```javascript
 vi genesis.json
 //插入如下配置
 {
@@ -72,22 +72,22 @@ vi genesis.json
 
 用这个配置文件初始化本地数据库，上面这个配置文件决定了创世区块。
 
-```js
+```javascript
 geth --datadir /root/ethereum/data/ init /root/ethereum/data/conf/genesis.json
 ```
 
 geth支持的参数
 
-参数 | 说明
----  | ---
-datadir | 指定数据目录
-console | 启动命令行模式，可以在geth里执行命令
-nodiscover | 关闭p2p网络的自动发现，不会被网上看到
-networkid  | 网络标识，私有链取一个大于4的随意的值
+| 参数 | 说明 |
+| --- | --- |
+| datadir | 指定数据目录 |
+| console | 启动命令行模式，可以在geth里执行命令 |
+| nodiscover | 关闭p2p网络的自动发现，不会被网上看到 |
+| networkid | 网络标识，私有链取一个大于4的随意的值 |
 
-####初始化数据库成功之后输出如下信息
+#### 初始化数据库成功之后输出如下信息
 
-```js
+```javascript
 INFO [04-17|20:41:08] Maximum peer count                       ETH=25 LES=0 total=25
 INFO [04-17|20:41:08] Allocated cache and file handles         database=/root/ethereum/data/geth/chaindata cache=16 handles=16
 INFO [04-17|20:41:08] Writing custom genesis block 
@@ -96,12 +96,12 @@ INFO [04-17|20:41:08] Successfully wrote genesis state         database=chaindat
 INFO [04-17|20:41:08] Allocated cache and file handles         database=/root/ethereum/data/geth/lightchaindata cache=16 handles=16
 INFO [04-17|20:41:08] Writing custom genesis block 
 INFO [04-17|20:41:08] Persisted trie from memory database      nodes=0 size=0.00B time=4.225µs gcnodes=0 gcsize=0.00B gctime=0s livenodes=1 livesize=0.00B
-INFO [04-17|20:41:08] Successfully wrote genesis state         database=lightchaindata  
+INFO [04-17|20:41:08] Successfully wrote genesis state         database=lightchaindata
 ```
 
-###启动成员节点
+### 启动成员节点
 
-```js
+```javascript
 geth --datadir /root/ethereum/data/ --nodiscover console 2>>eth_output.log
 ##成功之后会输出如下信息
 Welcome to the Geth JavaScript console!
@@ -110,9 +110,9 @@ instance: Geth/v1.8.2-stable/linux-amd64/go1.10.1
  modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
 ```
 
-启动成功之后，日志会输入到文件eth_output.log中。
+启动成功之后，日志会输入到文件eth\_output.log中。
 
-```js
+```javascript
 tail -f eth_output.log
 ###查看日志
 INFO [04-17|20:46:10] Disk storage enabled for ethash DAGs     dir=/root/.ethash                   count=2
@@ -127,9 +127,9 @@ INFO [04-17|20:46:10] RLPx listener up                         self="enode://e25
 INFO [04-17|20:46:10] IPC endpoint opened                      url=/root/ethereum/data/geth.ipc
 ```
 
-###接下来是web3的基本操作
+### 接下来是web3的基本操作
 
-```js
+```javascript
 //查看当前账户
 web3.eth.accounts
 ###当前没有账号
@@ -137,3 +137,4 @@ web3.eth.accounts
 ```
 
 [web3js的github主页,之后有时间翻译](https://github.com/ethereum/wiki/wiki/JavaScript-API)
+
