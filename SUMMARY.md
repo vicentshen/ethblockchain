@@ -10,4 +10,5 @@
   * 必要条件
   * 如何开始
   * [参考链接](dapp-kai-fa-gai-yao/can-kao-lian-jie.md)
+* [基本概念和术语](ji-ben-gai-nian-he-shu-yu.md)
 
