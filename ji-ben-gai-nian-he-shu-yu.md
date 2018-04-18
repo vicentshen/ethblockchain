@@ -35,17 +35,23 @@ Base58是用于Bitcoin中使用的一种独特的编码方式，主要用于产�
 - 支付到公钥Hash
 - 支付到脚本Hash
 - 挖矿交易
+
 ###比特币挖矿难度
 比特币通过调整挖矿难度控制挖矿产生速度，以保证每10分钟产生一个区块。目前每产生2016个区块就会调整难度，目前产生区块奖励25个比特币，这个数量每产生210000个区块减半（约等于4年）。
+
 ###PoW
 Proof of Work。
+
 ###PoS
 Proof of Stake。
+
 ###DPoS
 Delegated Proof of Stake。
+
 ###侧链（SideChain）
 侧链由Blockstram开发，使用楔入式侧链技术。
 遵守侧链协议的所有区块链，如以太坊，莱特币，狗狗币等，可以和主链转移货币。
+
 ###闪电网络
 闪电网络是为了解决比特币网络的TPS问题，主要思路是把大量交易放到比特币网络之外进行。
 核心的概念主要有两个：RSMC（Recoverable Sequence Maturity Contract）和 HTLC（Hashed Timelock Contract）。前者解决了链下交易的确认问题，后者解决了支付通道的问题。
