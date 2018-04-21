@@ -113,12 +113,12 @@ contract hello {
 ###编译源码
 请打开[BrowserSolidity](https://ethereum.github.io/browser-solidity)，然后将源码粘贴到输入框中去。
 
-![源码编译](.gitbook/assets/hello_compile.png)
+![源码编译](..\img\hello_compile.png)
 
 ###给变量赋值
 点击上一步中的detail按钮，获取部署合约的代码
 
-![编译后的代码](.gitbook/assets/hello_compile2.png)
+![编译后的代码](..\img\hello_compile2.png)
 
 然后给_greeting赋值
 ```js
