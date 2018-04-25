@@ -4,48 +4,54 @@
 
 让我们开始DApp开发的HelloWorld!
 
-##前置条件
-- 成功安装并启动Geth
-- Solidity编译环境，这里使用在线环境[BrowserSolidity](https://ethereum.github.io/browser-solidity)
+## 前置条件
 
-##启动Geth
-```sh
+* 成功安装并启动Geth
+* Solidity编译环境，这里使用在线环境[BrowserSolidity](https://ethereum.github.io/browser-solidity)
+
+## 启动Geth
+
+```bash
 geth --datadir ./ --nodiscover console 2>>eth_output.log
 ```
 
 启动之后就可以通过命令行的方式跟geth客户端进行交互。
 
-##几个基本操作
-说明 | API函数     
----      | ---   
-查看账户 | eth.accounts
-获取账户余额 | eth.getBalance('账号')
-生成账号 | personal.newAccount('密码')
-解锁账号 | personal.unlockAccount('账号','密码')
-锁定账号 | personal.lockAccount()
-转账     | eth.sendTransaction({from:'转账账号',to:'收款账号',value:web3.toWei(1,'ether')})
-挖矿     | miner.start()
-停止挖矿 | miner.stop()
-获取当前区块数| eth.blockNumber
-获取区块信息 | eth.getBlock(偏移量)
+## 几个基本操作
 
-##那么开始吧
+| 说明 | API函数 |
+| --- | --- |
+| 查看账户 | eth.accounts |
+| 获取账户余额 | eth.getBalance\('账号'\) |
+| 生成账号 | personal.newAccount\('密码'\) |
+| 解锁账号 | personal.unlockAccount\('账号','密码'\) |
+| 锁定账号 | personal.lockAccount\(\) |
+| 转账 | eth.sendTransaction\({from:'转账账号',to:'收款账号',value:web3.toWei\(1,'ether'\)}\) |
+| 挖矿 | miner.start\(\) |
+| 停止挖矿 | miner.stop\(\) |
+| 获取当前区块数 | eth.blockNumber |
+| 获取区块信息 | eth.getBlock\(偏移量\) |
+
+## 那么开始吧
 
 首先需要创建两个账户，查看是否存在账号
-```js
+
+```javascript
 eth.accounts
 //可以看到目前没有存在的账号
 []
 ```
 
 好吧，那么我们创建两个账号
-```js
+
+```javascript
 //这里设置账号的密码为account1，这个后续解锁账号的时候要用
 personal.newAccount('account1')
 ```
 
 然后我们再看看账号是否建立好了
-```js
+
+```javascript
 eth.accounts
 //可以看到一个账号已经建好了
 ["0xc1fb3c1c618baca030c6a4a1dc83948c3c417355"]
@@ -56,7 +62,8 @@ eth.accounts
 ```
 
 然后我们再来看看账号里面是否有钱，没钱搞个毛线。
-```js
+
+```javascript
 eth.getBalance(eth.accounts[0])
 //好吧，没钱
 0
@@ -64,17 +71,16 @@ eth.getBalance(eth.accounts[0])
 
 接下来一个区块链中的重要角色要出场了，来来来，旷工好出现了，都迫不及待要发家致富了。
 
-```js
+```javascript
 //不用怀疑，就是这么简单，挖到的矿默认进入第一个账号，也可以通过geth启动的时候设置收矿账号
 miner.start()
 ```
 
-过不了多久，你就会有种很富有的感觉，很快就有一大把的以太币了。
-光有钱还是不够的，要把钱花掉才能过一把有钱人的瘾么，哈哈...
+过不了多久，你就会有种很富有的感觉，很快就有一大把的以太币了。 光有钱还是不够的，要把钱花掉才能过一把有钱人的瘾么，哈哈...
 
 接下来，我们从0xc1fb3c1c618baca030c6a4a1dc83948c3c417355转一波钱到0xfed4bc66f2a00f1a457060008bea2b053f85c057。
 
-```js
+```javascript
 //转账之前先要输入密码，这个跟支付宝啥啥的都是一样的
 //解锁账号
 personal.unlockAccount(eth.accounts[0],"account1")
@@ -87,11 +93,13 @@ eth.getBalance(eth.accounts[0])
 
 如果你看到那么多零了，那就说明，转到账了，接下来才是刚到正题。
 
-##前戏结束，开始HelloWrold
+## 前戏结束，开始HelloWrold
 
-###编辑源码
+### 编辑源码
+
 请随便找个能编辑的文本编辑器完成，推荐使用Sublime（个人爱好）
-```js
+
+```javascript
 pragma solidity ^0.4.19;
 /**
  * The hello contract does this and that...
@@ -102,7 +110,7 @@ contract hello {
     function hello (string _greeting) public {
         greeting = _greeting;
     }
-    
+
 
     function sayHello () constant public returns (string) {
         return greeting;
@@ -110,18 +118,21 @@ contract hello {
 }
 ```
 
-###编译源码
+### 编译源码
+
 请打开[BrowserSolidity](https://ethereum.github.io/browser-solidity)，然后将源码粘贴到输入框中去。
 
-![源码编译](..\img\hello_compile.png)
+![](../.gitbook/assets/hello_compile.png)
 
-###给变量赋值
+### 给变量赋值
+
 点击上一步中的detail按钮，获取部署合约的代码
 
-![编译后的代码](..\img\hello_compile2.png)
+![](../.gitbook/assets/hello_compile2.png)
 
-然后给_greeting赋值
-```js
+然后给\_greeting赋值
+
+```javascript
 var _greeting = 'Hello World';
 var helloContract = web3.eth.contract([{"constant":true,"inputs":[],"name":"sayHello","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_greeting","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}]);
 var hello = helloContract.new(
@@ -138,23 +149,26 @@ var hello = helloContract.new(
  })
 ```
 
-###部署合约
+### 部署合约
+
 将如上代码粘贴到命令行，如果没有错误，稍微过一段时间之后看到如下说出就说明合约部署成功了
-```js
+
+```javascript
 Contract mined! address: 0x2f8746a78323f4f28b9cb865978f4d9f1c41ce9d transactionHash: 0xa5564ac79a22ec6c06b0f30e570e4d785742b570bc16479ff6c51607f39988e6
 ```
 
-###调用合约
+### 调用合约
 
-```js
+```javascript
 hello.sayHello()
 "Hello World"
 ```
 
 至此一次顺利的HelloWorld就此结束了
 
-###遇到的问题
+### 遇到的问题
 
-####exceeds block gas limit undefined
-1.减小交易的gasLimit；
-2.初始化geth的时候，配置genesis.json中的gasLimit为0xffffff;
+#### exceeds block gas limit undefined
+
+1.减小交易的gasLimit； 2.初始化geth的时候，配置genesis.json中的gasLimit为0xffffff;
+
